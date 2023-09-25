@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import {IoThumbsUp, IoThumbsDown} from 'react-icons/io5'
 import { useState } from 'react'
 import styles from './Topico.module.css'
+import {v4 as uuidv4} from 'uuid'
+import axios from 'axios'
 
 export default function Topico(){
 
@@ -62,7 +64,8 @@ export default function Topico(){
         color:${({cor}) => cor}
     `
 
-    const incrementaLike = () => {
+
+    const incrementaLike = async (id:string, body:string) => {
         setContadorLike(contadorLike = contadorLike + 1)
         incrementaSaldo()
     }
@@ -75,6 +78,8 @@ export default function Topico(){
     const incrementaSaldo = () => {
         setSaldo(contadorLike - contadorDislike)
     }
+
+    const id = uuidv4()
 
     return (
         <div>
