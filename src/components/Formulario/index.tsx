@@ -1,20 +1,29 @@
+import Botao from '../Botao'
+import styles from './Formulario.module.css'
+
 export default function Formulario(){
+
+    const criarPost = () => {
+        fetch("http://localhost:3000/topicos",{
+            method:"POST",
+            headers:{
+                'Content-type':'application/json'
+            }
+        })
+    }
+
     return(
-        <div>
+        <div className={styles.main}>
             <form>
-                <div>
-                    <input type="text" name="titulo"/>
-                    <label htmlFor="titulo">Titulo</label>
+                <div className={styles.input}>
+                    <label htmlFor="titulo"></label>
+                    <input type="text" placeholder='Assunto da postagem' name="titulo"/>
                 </div>
-                <div>
-                    <textarea name="texto" id=""></textarea>
+                <div className={styles.textarea}>
+                    <textarea name="texto" cols='30' rows='10' placeholder="Conteúdo da postagem"></textarea>
                     <label htmlFor="texto"></label>
                 </div>
-                <div>
-                    <input type="datetime-local" name="data"/>
-                    <label htmlFor="name">Insira a data e local</label>
-                </div>
-                <button>Enviar</button>
+                <Botao>Enviar</Botao>
             </form>
         </div>
     )

@@ -1,0 +1,29 @@
+
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input,.textarea{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.input{
+    display: flex;
+    flex-direction: column;
+}
+
+.input > input{
+    padding: 10px;
+    border-width: 1px;
+    width: 20vw;
+    border-radius: 8px;
+    border-color: #CCCCCC;
+    background-color: #FFFFFF;
+    color: #000000;
+    border-style: solid;
+    border-radius: 0px;
+    box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+}
