@@ -4,9 +4,12 @@ import styles from './Formulario.module.css'
 import {v4 as uuid} from 'uuid'
 
 interface dataProps{
-   id:string
+    id:string
     titulo:string,
-    conteudo:string
+    conteudo:string,
+    data:string,
+    likes:number
+
 }
 
 export default function Formulario(){
@@ -29,12 +32,15 @@ export default function Formulario(){
     const HandleSubmit = (event:React.FormEvent<HTMLFormElement>) => {
        event.preventDefault()
        const novoId = uuid()
-       console.log(novoId)
+       const dataAtual = new Date().toLocaleDateString('pt-br')
+       const likes = 0
 
         const data:dataProps = {
             id:novoId,
             titulo:titulo,
             conteudo:conteudo,
+            data:dataAtual,
+            likes:0
         }
 
         console.log(data)
