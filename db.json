@@ -40,7 +40,23 @@
       "titulo": "teste2",
       "conteudo": "t2",
       "data": "27/09/2023",
+      "likes": 5,
+      "dislikes": 2
+    },
+    {
+      "id": "dd16bde7-2099-40d1-9da7-9625da81e7cf",
+      "titulo": "aaaaaaaaaaaaaaaaaaaaaaaaa",
+      "conteudo": "aaaaaaaaaaaaaaa",
+      "data": "27/09/2023",
       "likes": 0
+    },
+    {
+      "id": "0bd0e7fc-4717-4228-ac46-12b352ac88d2",
+      "titulo": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "conteudo": "a\n",
+      "data": "27/09/2023",
+      "likes": 0,
+      "dislikes": 9
     }
   ]
 }

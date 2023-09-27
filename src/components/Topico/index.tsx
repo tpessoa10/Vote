@@ -75,10 +75,10 @@ export default function Topico({id, titulo, conteudo, data, likes, dislikes, sal
     `
 
 
-    const incrementaLike = async (id:string, body:string) => {
+    const incrementaLike = () => {
         /*setContadorLike(contadorLike = contadorLike + 1)
         incrementaSaldo()*/
-        fetch(`http://localhosto:3000/topicos/${id}`,{
+        fetch(`http://localhost:3000/topicos/${id}`,{
           method:'PATCH',
           headers:{
             'Content-type':'application/json'
