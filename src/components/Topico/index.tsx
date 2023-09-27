@@ -5,11 +5,21 @@ import styles from './Topico.module.css'
 import {v4 as uuidv4} from 'uuid'
 import axios from 'axios'
 
-export default function Topico(){
+interface TopicoProps{
+  id:string,
+  titulo:string,
+  conteudo:string,
+  data:string,
+  likes:number,
+  dislikes:number,
+  saldo:number
+}
+
+export default function Topico({id, titulo, conteudo, data, likes, dislikes, saldo}:TopicoProps){
 
     var [contadorLike, setContadorLike] = useState<number>(0)
     var [contadorDislike, setContadorDislike] = useState<number>(0)
-    const [saldo, setSaldo] = useState<number>(0)
+    const [saldoLikes, setSaldoLikes] = useState<number>(0)
 
     const BotaoLike = styled.button`
     background-color: #fff;
@@ -66,35 +76,65 @@ export default function Topico(){
 
 
     const incrementaLike = async (id:string, body:string) => {
-        setContadorLike(contadorLike = contadorLike + 1)
-        incrementaSaldo()
+        /*setContadorLike(contadorLike = contadorLike + 1)
+        incrementaSaldo()*/
+        fetch(`http://localhosto:3000/topicos/${id}`,{
+          method:'PATCH',
+          headers:{
+            'Content-type':'application/json'
+          },
+          body:JSON.stringify({
+            likes: contadorLike + 1
+          }),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          setContadorLike(data.likes)
+        })
+        .catch((error) =>{
+          console.log(error)
+        })
     }
 
     const incrementaDislike = () => {
-        setContadorDislike(contadorDislike = contadorDislike + 1)
-        incrementaSaldo()
+        /*setContadorDislike(contadorDislike = contadorDislike + 1)
+        incrementaSaldo()*/
+        fetch(`http://localhost:3000/topicos/${id}`,{
+          method:'PATCH',
+          headers:{
+            'Content-type':'application/json',
+          },
+          body:JSON.stringify({
+            dislikes: contadorDislike + 1
+          })
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          setContadorDislike(data.dislikes)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
 
-    const incrementaSaldo = () => {
+    /*const incrementaSaldo = () => {
         setSaldo(contadorLike - contadorDislike)
-    }
+    }*/
 
 
 
     return (
         <div>
             <div>
-                <h2>Topico</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sequi exercitationem nemo, 
-                    ab atque voluptate aperiam quis ad fugiat ipsam quia illum quibusdam consequuntur, dolores nam sunt tenetur maxime aut.</p>
+                <h2>{titulo}</h2>
+                <p>{conteudo}</p>
                 <div className={styles.likes}>
                     <BotaoLike onClick={incrementaLike}><IoThumbsUp/>{contadorLike}</BotaoLike>
                     <BotaoDislike onClick={incrementaDislike}><IoThumbsDown/>{contadorDislike}</BotaoDislike>
                 <div>{saldo >=0 ? <SaldoSpan cor='green'>{saldo}</SaldoSpan> : <SaldoSpan cor='red'>{saldo}</SaldoSpan>}</div>
                 </div>
-                <span>25/09/2023</span>
+                <span>{data}</span>
                 <br />
-                <span>Thiago, Teresina, Brasil</span>
             </div>
         </div>
     )
