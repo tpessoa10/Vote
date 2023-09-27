@@ -1,8 +1,13 @@
 import { ChangeEvent, useState } from 'react'
 import Botao from '../Botao'
 import styles from './Formulario.module.css'
+import {v4 as uuid} from 'uuid'
 
-
+interface dataProps{
+   id:string
+    titulo:string,
+    conteudo:string
+}
 
 export default function Formulario(){
 
@@ -14,39 +19,50 @@ export default function Formulario(){
        setTitulo(event.target.value)
     }
 
-    const conteudoSubmit = (event:ChangeEvent<HTMLTextAreaElement>){
+    const conteudoSubmit = (event:ChangeEvent<HTMLTextAreaElement>) => {
         event.preventDefault()
         setConteudo(event.target.value)
     }
 
-    const topico = {
-        titulo:titulo,
-        conteudo:conteudo
-    }
     
-    const HandleSubmit = () => {
+    
+    const HandleSubmit = (event:React.FormEvent<HTMLFormElement>) => {
+       event.preventDefault()
+       const novoId = uuid()
+       console.log(novoId)
+
+        const data:dataProps = {
+            id:novoId,
+            titulo:titulo,
+            conteudo:conteudo,
+        }
+
+        console.log(data)
+
         fetch("http://localhost:3000/topicos",{
             method:"POST",
             headers:{
                 'Content-type':'application/json'
             },
-            body:JSON.stringify(topico)
+            body:JSON.stringify(data)
         })
         .then((response) => response.json())
-        .then((topico) => {
-            console.log(topico)
+        .then((data) => {
+            console.log(data)
         })
         .catch((error) => {
             console.log(error)
         })
     }
 
+
+
     return(
         <div className={styles.main}>
-            <form>
+            <form onSubmit={HandleSubmit}>
                 <div className={styles.input}>
                     <label htmlFor="titulo"></label>
-                    <input type="text" placeholder='Assunto da postagem' value={titulo} onSubmit={tituloSubmit} name="titulo"/>
+                    <input type="text" placeholder='Assunto da postagem' value={titulo} onChange={tituloSubmit} name="titulo"/>
                 </div>
                 <div className={styles.textarea}>
                     <textarea name="texto" cols='30' rows='10' value={conteudo} onChange={conteudoSubmit} placeholder="Conteúdo da postagem"></textarea>
@@ -56,4 +72,8 @@ export default function Formulario(){
             </form>
         </div>
     )
+}
+
+function uuidv4() {
+    throw new Error('Function not implemented.')
 }

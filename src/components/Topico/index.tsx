@@ -79,7 +79,7 @@ export default function Topico(){
         setSaldo(contadorLike - contadorDislike)
     }
 
-    const id = uuidv4()
+
 
     return (
         <div>
