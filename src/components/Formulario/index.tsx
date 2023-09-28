@@ -9,7 +9,9 @@ interface dataProps{
     titulo:string,
     conteudo:string,
     data:string,
-    likes:number
+    likes:number,
+    dislikes:number,
+    saldo:number
 
 }
 
@@ -35,14 +37,15 @@ export default function Formulario(){
        event.preventDefault()
        const novoId = uuid()
        const dataAtual = new Date().toLocaleDateString('pt-br')
-       const likes = 0
 
         const data:dataProps = {
             id:novoId,
             titulo:titulo,
             conteudo:conteudo,
             data:dataAtual,
-            likes:0
+            likes:0,
+            dislikes:0,
+            saldo:0
         }
 
         console.log(data)
@@ -85,6 +88,3 @@ export default function Formulario(){
     )
 }
 
-function uuidv4() {
-    throw new Error('Function not implemented.')
-}
