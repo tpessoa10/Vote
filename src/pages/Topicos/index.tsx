@@ -30,7 +30,7 @@ export default function Topicos(){
    }, [])
 
     return (
-       <>
+       <div className={styles.main}>
             <div className={styles.botaoDiv}>
                <Link to="/form">
                   <Botao>Criar Post</Botao>
@@ -40,9 +40,9 @@ export default function Topicos(){
             <ul>
                {data.map(item => (
                   <Topico key={item.id} id={item.id} titulo={item.titulo} conteudo={item.conteudo} data={item.data} likes={item.likes} dislikes={item.dislikes} saldo={item.saldo}/>
-               ))}
+                  ))}
             </ul>
         </div>
-       </> 
+      </div>
     )
 }
