@@ -39,7 +39,7 @@ export default function Topicos(){
         <div className={styles.main}>
             <ul>
                {data.map(item => (
-                  <Topico id={item.id} titulo={item.titulo} conteudo={item.conteudo} data={item.data} likes={item.likes} dislikes={item.dislikes} saldo={item.saldo}/>
+                  <Topico key={item.id} id={item.id} titulo={item.titulo} conteudo={item.conteudo} data={item.data} likes={item.likes} dislikes={item.dislikes} saldo={item.saldo}/>
                ))}
             </ul>
         </div>

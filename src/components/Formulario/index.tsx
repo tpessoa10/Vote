@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from 'react'
 import Botao from '../Botao'
 import styles from './Formulario.module.css'
 import {v4 as uuid} from 'uuid'
+import {useNavigate} from 'react-router-dom'
 
 interface dataProps{
     id:string
@@ -16,6 +17,7 @@ export default function Formulario(){
 
     const [titulo, setTitulo] = useState('')
     const [conteudo, setConteudo] = useState('')
+    const navigate = useNavigate()
 
     const tituloSubmit = (event:ChangeEvent<HTMLInputElement>) => {
         event.preventDefault()
@@ -59,6 +61,9 @@ export default function Formulario(){
         .catch((error) => {
             console.log(error)
         })
+        setConteudo('')
+        setTitulo('')
+        navigate(-1)
     }
 
 
@@ -71,7 +76,7 @@ export default function Formulario(){
                     <input type="text" placeholder='Assunto da postagem' value={titulo} onChange={tituloSubmit} name="titulo"/>
                 </div>
                 <div className={styles.textarea}>
-                    <textarea name="texto" cols='30' rows='10' value={conteudo} onChange={conteudoSubmit} placeholder="Conteúdo da postagem"></textarea>
+                    <textarea name="texto" cols={70} rows={10} value={conteudo} onChange={conteudoSubmit} placeholder="Conteúdo da postagem"></textarea>
                     <label htmlFor="texto"></label>
                 </div>
                 <Botao type='submit'>Enviar</Botao>

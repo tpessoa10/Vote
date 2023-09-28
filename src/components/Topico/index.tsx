@@ -84,7 +84,7 @@ export default function Topico({id, titulo, conteudo, data, likes, dislikes, sal
             'Content-type':'application/json'
           },
           body:JSON.stringify({
-            likes: contadorLike + 1
+            likes: contadorLike + 1,
           }),
         })
         .then((response) => response.json())
@@ -94,6 +94,7 @@ export default function Topico({id, titulo, conteudo, data, likes, dislikes, sal
         .catch((error) =>{
           console.log(error)
         })
+        atualizaSaldo()
     }
 
     const incrementaDislike = () => {
@@ -105,7 +106,7 @@ export default function Topico({id, titulo, conteudo, data, likes, dislikes, sal
             'Content-type':'application/json',
           },
           body:JSON.stringify({
-            dislikes: contadorDislike + 1
+            dislikes: contadorDislike + 1,
           })
         })
         .then((response) => response.json())
@@ -115,11 +116,27 @@ export default function Topico({id, titulo, conteudo, data, likes, dislikes, sal
         .catch((error) => {
           console.log(error)
         })
+        atualizaSaldo()
     }
 
-    /*const incrementaSaldo = () => {
-        setSaldo(contadorLike - contadorDislike)
-    }*/
+   const atualizaSaldo = () => {
+        fetch(`http://localhost:3000/topicos/${id}`,{
+          method:'PATCH',
+          headers:{
+            'Content-type':'application/json'
+          },
+          body:JSON.stringify({
+            saldo:contadorLike - contadorDislike
+          })
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          setSaldoLikes(data.saldo)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
 
 
 

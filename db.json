@@ -1,62 +1,12 @@
 {
   "topicos": [
     {
-      "id": "fbc00f72-c0e2-47d2-8694-62bb1fa44b8f",
-      "titulo": "aaaaaaaaaaaaa",
-      "conteudo": "aaa",
+      "id": "8ab1022a-571a-4d1a-bbdf-343bf0120faa",
+      "titulo": "aaa",
+      "conteudo": "aa",
       "data": "27/09/2023",
-      "likes": 0
-    },
-    {
-      "id": "7c076f6f-0ac7-4fb9-a8c9-7df84d3fd193",
-      "titulo": "Teste",
-      "conteudo": "teste",
-      "data": "27/09/2023",
-      "likes": 0
-    },
-    {
-      "id": "dc163faa-b193-4d3b-92c3-38c667b537e7",
-      "titulo": "teste2",
-      "conteudo": "t2",
-      "data": "27/09/2023",
-      "likes": 0
-    },
-    {
-      "id": "d707c6ae-31cc-4071-8246-0043c966166f",
-      "titulo": "teste2",
-      "conteudo": "t2",
-      "data": "27/09/2023",
-      "likes": 0
-    },
-    {
-      "id": "7b98c81d-5ea7-4311-9918-0537abb3898f",
-      "titulo": "teste2",
-      "conteudo": "t2",
-      "data": "27/09/2023",
-      "likes": 0
-    },
-    {
-      "id": "428817a8-f6f9-478e-8ed8-3193f17c7c1d",
-      "titulo": "teste2",
-      "conteudo": "t2",
-      "data": "27/09/2023",
-      "likes": 5,
-      "dislikes": 2
-    },
-    {
-      "id": "dd16bde7-2099-40d1-9da7-9625da81e7cf",
-      "titulo": "aaaaaaaaaaaaaaaaaaaaaaaaa",
-      "conteudo": "aaaaaaaaaaaaaaa",
-      "data": "27/09/2023",
-      "likes": 0
-    },
-    {
-      "id": "0bd0e7fc-4717-4228-ac46-12b352ac88d2",
-      "titulo": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      "conteudo": "a\n",
-      "data": "27/09/2023",
-      "likes": 0,
-      "dislikes": 9
+      "likes": 4,
+      "saldo": 3
     }
   ]
 }
