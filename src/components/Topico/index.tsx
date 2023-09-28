@@ -137,10 +137,8 @@ export default function Topico({id, titulo, conteudo, data}:TopicoProps){
     return (
         <div>
             <div className={styles.main}>
-              <div>
                 <h2>{titulo}</h2>
                 <p>{conteudo}</p>
-              </div>
                 <div className={styles.likes}>
                     <BotaoLike onClick={incrementaLike}><IoThumbsUp/>{contadorLike}</BotaoLike>
                     <BotaoDislike onClick={incrementaDislike}><IoThumbsDown/>{contadorDislike}</BotaoDislike>
