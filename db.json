@@ -14,9 +14,9 @@
       "titulo": "React é chato",
       "conteudo": "To brincando...",
       "data": "28/09/2023",
-      "likes": 5,
-      "dislikes": 0,
-      "saldo": 5
+      "likes": 7,
+      "dislikes": 1,
+      "saldo": 6
     },
     {
       "id": "99a30341-2285-4ac4-9c8f-7873765fa917",
@@ -26,6 +26,15 @@
       "likes": 0,
       "dislikes": 57,
       "saldo": -57
+    },
+    {
+      "id": "dd58f8e7-d2a5-4975-9588-8e4fc3d87cc6",
+      "titulo": "Apenas testando",
+      "conteudo": "Só um teste...",
+      "data": "28/09/2023",
+      "likes": 5,
+      "dislikes": 4,
+      "saldo": 1
     }
   ]
 }
