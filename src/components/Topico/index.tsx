@@ -102,7 +102,7 @@ export default function Topico({id, titulo, conteudo, data}:TopicoProps){
           }),
         })
         .then((response) => response.json())
-        .then((data) => {
+        .then(() => {
           setContadorLike(novoLikes)
           setSaldoLikes(novoSaldo)
           console.log(contadorLike)
@@ -126,7 +126,7 @@ export default function Topico({id, titulo, conteudo, data}:TopicoProps){
           })
         })
         .then((response) => response.json())
-        .then((data) => {
+        .then(() => {
           setContadorDislike(novoDislike)
           setSaldoLikes(novoSaldo)
         })
