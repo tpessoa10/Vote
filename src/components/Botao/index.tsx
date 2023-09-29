@@ -5,12 +5,6 @@ interface BotaoProps{
     type?:"button" | "submit" | "reset"
 }
 
-enum ButtonTypes{
-    "button",
-    "submit",
-    "reset",
-    undefined
-}
 
 export default function Botao({children, type}:BotaoProps){
     return (
