@@ -74,7 +74,7 @@ export default function Topico({id, titulo, conteudo, data}:TopicoProps){
     `
 
       useEffect(() => {
-      fetch(`http://localhost:3000/topicos/${id}`)
+      fetch(`https://json-server-wheat-two.vercel.app/topicos/${id}`)
       .then((response) => response.json())
       .then(data => {
          setContadorLike(data.likes)
@@ -91,7 +91,7 @@ export default function Topico({id, titulo, conteudo, data}:TopicoProps){
     const incrementaLike = async () => {
       const novoLikes = contadorLike + 1
       const novoSaldo = novoLikes - contadorDislike
-        await fetch(`http://localhost:3000/topicos/${id}`,{
+        await fetch(`https://json-server-wheat-two.vercel.app/topicos/${id}`,{
           method:'PATCH',
           headers:{
             'Content-type':'application/json'
@@ -115,7 +115,7 @@ export default function Topico({id, titulo, conteudo, data}:TopicoProps){
     const incrementaDislike = async () => {
       const novoDislike = contadorDislike + 1
       const novoSaldo = saldoLikes - 1
-        await fetch(`http://localhost:3000/topicos/${id}`,{
+        await fetch(`https://json-server-wheat-two.vercel.app/topicos/${id}`,{
           method:'PATCH',
           headers:{
             'Content-type':'application/json',
