@@ -18,7 +18,7 @@ export default function Topicos(){
    const [data, setData] = useState<ItemProps[]>([])
 
    useEffect(() =>{
-      fetch('https://json-server-wheat-two.vercel.app/topicos')
+      fetch('http://localhost:3000/topicos')
       .then((response) => response.json())
       .then(data => {
          setData(data)
