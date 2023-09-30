@@ -50,7 +50,7 @@ export default function Formulario(){
 
         console.log(data)
 
-        fetch("https://json-server-wheat-two.vercel.app/topicos",{
+        fetch("http://localhost:3000/topicos",{
             method:"POST",
             headers:{
                 'Content-type':'application/json'
