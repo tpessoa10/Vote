@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {IoThumbsUp, IoThumbsDown} from 'react-icons/io5'
-import { useEffect, useReducer, useState } from 'react'
+import { useEffect, useReducer } from 'react'
 import styles from './Topico.module.css'
 
 
