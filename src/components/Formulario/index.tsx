@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useReducer} from 'react'
 import Botao from '../Botao'
 import styles from './Formulario.module.css'
 import {v4 as uuid} from 'uuid'
@@ -15,24 +15,45 @@ interface dataProps{
 
 }
 
-export default function Formulario(){
+const reducer = (state:any, action:any) => {
+    switch(action.type){
+        case 'setTitulo':
+            return{...state,
+                titulo:action.payload
+            }
+        case 'setConteudo':
+            return{...state,
+                conteudo:action.payload
+        }
+        case 'resetForm':{
+            return{...state,
+                titulo: '',
+                conteudo:''
+            }
+        }
+        default:
+            return state
+    }
+}
 
-    const [titulo, setTitulo] = useState('')
-    const [conteudo, setConteudo] = useState('')
+export default function Formulario(){
+    const [state, dispatch] = useReducer(reducer, {
+        titulo: '',
+        conteudo: ''
+    })
+
     const navigate = useNavigate()
 
     const tituloSubmit = (event:ChangeEvent<HTMLInputElement>) => {
         event.preventDefault()
-       setTitulo(event.target.value)
+        dispatch({type:'setTitulo', payload: event.target.value})
     }
 
     const conteudoSubmit = (event:ChangeEvent<HTMLTextAreaElement>) => {
         event.preventDefault()
-        setConteudo(event.target.value)
+        dispatch({type:'setConteudo', payload:event.target.value})
     }
-
-    
-    
+ 
     const HandleSubmit = (event:React.FormEvent<HTMLFormElement>) => {
        event.preventDefault()
        const novoId = uuid()
@@ -40,8 +61,8 @@ export default function Formulario(){
 
         const data:dataProps = {
             id:novoId,
-            titulo:titulo,
-            conteudo:conteudo,
+            titulo:state.titulo,
+            conteudo:state.conteudo,
             data:dataAtual,
             likes:0,
             dislikes:0,
@@ -64,27 +85,26 @@ export default function Formulario(){
         .catch((error) => {
             console.log(error)
         })
-        setConteudo('')
-        setTitulo('')
+        dispatch({type:'resetForm'})
         navigate(-1)
     }
-
-
 
     return(
         <div className={styles.main}>
             <form onSubmit={HandleSubmit}>
                 <div className={styles.input}>
                     <label htmlFor="titulo"></label>
-                    <input type="text" placeholder='Assunto da postagem' value={titulo} onChange={tituloSubmit} name="titulo"/>
+                    <input type="text" placeholder='Assunto da postagem' value={state.titulo} onChange={tituloSubmit} name="titulo"/>
                 </div>
                 <div className={styles.textarea}>
-                    <textarea name="texto" cols={70} rows={10} value={conteudo} onChange={conteudoSubmit} placeholder="Conteúdo da postagem"></textarea>
+                    <textarea name="texto" cols={70} rows={10} value={state.conteudo} onChange={conteudoSubmit} placeholder="Conteúdo da postagem"></textarea>
                     <label htmlFor="texto"></label>
                 </div>
                 <Botao type='submit'>Enviar</Botao>
+            
             </form>
         </div>
     )
 }
+
 

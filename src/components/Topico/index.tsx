@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {IoThumbsUp, IoThumbsDown} from 'react-icons/io5'
-import { useEffect, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import styles from './Topico.module.css'
 
 
@@ -14,11 +14,34 @@ interface TopicoProps{
   saldo:number
 }
 
-export default function Topico({id, titulo, conteudo, data}:TopicoProps){
+const reducer = (state:any, action:any) => {
+  switch(action.type){
+    case "incrementaLike":
+      return {...state, 
+        contadorLike: state.contadorLike + 1,
+        saldo: state.saldo + 1
+      }
+    case "incrementaDislike":
+      return {...state, 
+        contadorDislike: state.contadorDislike + 1,
+        saldo: state.saldo - 1
+      }
+      case 'setInitialValues':
+        return {
+          ...state,
+          ...action.payload,
+        };
+    default:
+      return state
+  }
+}
 
-    var [contadorLike, setContadorLike] = useState<number>(0)
-    var [contadorDislike, setContadorDislike] = useState<number>(0)
-    const [saldoLikes, setSaldoLikes] = useState<number>(0)
+export default function Topico({id, titulo, conteudo, data}:TopicoProps){
+  const [state, dispatch] = useReducer(reducer, {
+    contadorLike: 0,
+    contadorDislike: 0,
+    saldo: 0
+  })
 
     const BotaoLike = styled.button`
     background-color: #fff;
@@ -77,10 +100,16 @@ export default function Topico({id, titulo, conteudo, data}:TopicoProps){
       fetch(`http://localhost:3000/topicos/${id}`)
       .then((response) => response.json())
       .then(data => {
-         setContadorLike(data.likes)
-         setContadorDislike(data.dislikes)
-         setSaldoLikes(data.likes - data.dislikes)
-         console.log('saldo= ',data.saldo)
+
+        dispatch({
+          type:'setInitialValues',
+          payload:{
+            contadorLike: data.likes,
+            contadorDislike: data.dislikes,
+            saldo: data.likes - data.dislikes
+          }
+        })
+        
       })
       .catch(error => {
          console.log(error)
@@ -89,8 +118,8 @@ export default function Topico({id, titulo, conteudo, data}:TopicoProps){
     )
 
     const incrementaLike = async () => {
-      const novoLikes = contadorLike + 1
-      const novoSaldo = novoLikes - contadorDislike
+      const novoLikes = state.contadorLike + 1
+      const novoSaldo = novoLikes - state.contadorDislike
         await fetch(`http://localhost:3000/topicos/${id}`,{
           method:'PATCH',
           headers:{
@@ -103,9 +132,7 @@ export default function Topico({id, titulo, conteudo, data}:TopicoProps){
         })
         .then((response) => response.json())
         .then(() => {
-          setContadorLike(novoLikes)
-          setSaldoLikes(novoSaldo)
-          console.log(contadorLike)
+          dispatch({type: 'incrementaLike'})
         })
         .catch((error) =>{
           console.log(error)
@@ -113,8 +140,8 @@ export default function Topico({id, titulo, conteudo, data}:TopicoProps){
     }
 
     const incrementaDislike = async () => {
-      const novoDislike = contadorDislike + 1
-      const novoSaldo = saldoLikes - 1
+      const novoDislike = state.contadorDislike + 1
+      const novoSaldo = state.saldo - 1
         await fetch(`http://localhost:3000/topicos/${id}`,{
           method:'PATCH',
           headers:{
@@ -127,12 +154,9 @@ export default function Topico({id, titulo, conteudo, data}:TopicoProps){
         })
         .then((response) => response.json())
         .then(() => {
-          setContadorDislike(novoDislike)
-          setSaldoLikes(novoSaldo)
+          dispatch({type: 'incrementaDislike'})
         })
     }
-
-  
 
     return (
         <div>
@@ -140,9 +164,9 @@ export default function Topico({id, titulo, conteudo, data}:TopicoProps){
                 <h2>{titulo}</h2>
                 <p>{conteudo}</p>
                 <div className={styles.likes}>
-                    <BotaoLike onClick={incrementaLike}><IoThumbsUp/>{contadorLike}</BotaoLike>
-                    <BotaoDislike onClick={incrementaDislike}><IoThumbsDown/>{contadorDislike}</BotaoDislike>
-                <div>{saldoLikes >=0 ? <SaldoSpan cor='green'>{saldoLikes}</SaldoSpan> : <SaldoSpan cor='red'>{saldoLikes}</SaldoSpan>}</div>
+                    <BotaoLike onClick={incrementaLike}><IoThumbsUp/>{state.contadorLike}</BotaoLike>
+                    <BotaoDislike onClick={incrementaDislike}><IoThumbsDown/>{state.contadorDislike}</BotaoDislike>
+                <div>{state.saldo >=0 ? <SaldoSpan cor='green'>{state.saldo}</SaldoSpan> : <SaldoSpan cor='red'>{state.saldo}</SaldoSpan>}</div>
                 </div>
                 <span>{data}</span>
                 <br />
@@ -150,3 +174,4 @@ export default function Topico({id, titulo, conteudo, data}:TopicoProps){
         </div>
     )
 }
+
