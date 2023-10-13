@@ -1,22 +1,5 @@
 {
   "topicos": [
-    {
-      "id": "c370c2f6-dda2-4794-be98-e9120c958cb2",
-      "titulo": "teste",
-      "conteudo": "a",
-      "data": "08/10/2023",
-      "likes": 6,
-      "dislikes": 4,
-      "saldo": 2
-    },
-    {
-      "id": "b91198c0-a725-44b7-939e-8c75aabe5a8f",
-      "titulo": "teste2",
-      "conteudo": "teste2",
-      "data": "08/10/2023",
-      "likes": 4,
-      "dislikes": 6,
-      "saldo": -2
-    }
+  
   ]
 }

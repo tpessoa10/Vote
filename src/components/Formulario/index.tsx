@@ -86,7 +86,7 @@ export default function Formulario(){
             console.log(error)
         })
         dispatch({type:'resetForm'})
-        navigate(-1)
+        navigate("/topicos")
     }
 
     return(
